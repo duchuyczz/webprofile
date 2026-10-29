@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrap">
+        <a href="trangchu.html" class="auth-back">← Về trang chủ</a>
+
+        <div class="auth-card">
+            <h1>Đăng nhập</h1>
+            <p class="auth-subtitle">Chào mừng bạn quay lại (demo)</p>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••" minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary auth-btn">Đăng nhập</button>
+            </form>
+
+            <p class="auth-switch">
+                Chưa có tài khoản?
+                <a href="dangky.html">Đăng ký</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>

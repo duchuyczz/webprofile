@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lương Đức Huy | Portfolio</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== HEADER / NAV ========== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#home" class="logo">Lương Đức Huy</a>
+
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Trang chủ</a>
+                <a href="#about" class="nav-link">Giới thiệu</a>
+                <a href="#education" class="nav-link">Học vấn</a>
+                <a href="#skills" class="nav-link">Kỹ năng</a>
+                <a href="#projects" class="nav-link">Dự án</a>
+                <a href="#contact" class="nav-link">Liên hệ</a>
+                <div class="nav-divider"></div>
+                <a href="dangnhap.html" class="nav-link nav-auth">Đăng nhập</a>
+                <a href="dangky.html" class="nav-link nav-auth nav-auth-primary">Đăng ký</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text animate-on-load">
+                <p class="hero-greeting">Xin chào, mình là</p>
+                <h1 class="hero-name">Lương Đức Huy</h1>
+                <h2 class="hero-title">Sinh viên Công nghệ thông tin</h2>
+                <p class="hero-desc">
+                    Sinh viên Khoa Công nghệ thông tin — Đại học Quy Nhơn.
+                    Thích học hỏi, khám phá công nghệ và hoàn thiện bản thân mỗi ngày.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Xem dự án</a>
+                    <a href="#contact" class="btn btn-outline">Liên hệ</a>
+                </div>
+            </div>
+            <div class="hero-image animate-on-load delay-1">
+                <img src="../images/anhdaidien.JPG" alt="Ảnh đại diện Lương Đức Huy" class="avatar-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title reveal">Giới thiệu</h2>
+            <div class="about-content">
+                <div class="about-text reveal">
+                    <p>
+                        Xin chào! Mình là <strong>Lương Đức Huy</strong>, 19 tuổi,
+                        hiện là sinh viên Khoa Công nghệ thông tin tại Đại học Quy Nhơn.
+                    </p>
+                    <p>
+                        Mình đang trong quá trình học tập, tìm hiểu các lĩnh vực công nghệ
+                        và rèn luyện kỹ năng. Đây là trang portfolio demo — sẽ cập nhật
+                        thêm dự án và thông tin sau.
+                    </p>
+                </div>
+                <div class="about-info reveal delay-1">
+                    <ul>
+                        <li><strong>Họ tên:</strong> Lương Đức Huy</li>
+                        <li><strong>Tuổi:</strong> 19</li>
+                        <li><strong>Nghề nghiệp:</strong> Sinh viên</li>
+                        <li><strong>Địa chỉ:</strong> Quy Nhơn</li>
+                        <li><strong>GitHub:</strong> <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer" class="info-link">github.com/duchuyczz</a></li>
+                        <li><strong>Email:</strong> <a href="mailto:email@example.com" class="info-link">email@example.com</a> <span style="opacity:.6;font-size:.85em">(demo)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EDUCATION ========== -->
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title reveal">Học vấn</h2>
+            <div class="education-card reveal">
+                <div class="education-icon">🎓</div>
+                <div class="education-body">
+                    <h3>Đại học Quy Nhơn</h3>
+                    <p class="education-major">Khoa Công nghệ thông tin</p>
+                    <p class="education-meta">Sinh viên · Quy Nhơn</p>
+                    <p class="education-desc">
+                        Đang theo học tại Khoa Công nghệ thông tin, từng bước xây dựng
+                        nền tảng kiến thức và kỹ năng trong lĩnh vực CNTT.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title reveal">Kỹ năng</h2>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <h3>HTML</h3>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                    <h3>CSS</h3>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                    <h3>JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="70"></div>
+                    </div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                    <h3>Responsive Design</h3>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="80"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title reveal">Dự án</h2>
+            <div class="projects-grid">
+                <article class="project-card reveal">
+                    <div class="project-image">Ảnh dự án 1</div>
+                    <div class="project-info">
+                        <h3>Portfolio cá nhân</h3>
+                        <p>Trang giới thiệu bản thân, học vấn, kỹ năng và dự án.</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JS</span>
+                        </div>
+                        <a href="#home" class="project-link">Xem trang này →</a>
+                    </div>
+                </article>
+
+                <article class="project-card reveal delay-1">
+                    <div class="project-image">Ảnh dự án 2</div>
+                    <div class="project-info">
+                        <h3>Tên dự án 2</h3>
+                        <p>Mô tả ngắn về dự án (sẽ cập nhật sau).</p>
+                        <div class="project-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                        </div>
+                        <a href="#" class="project-link">Xem chi tiết →</a>
+                    </div>
+                </article>
+
+                <article class="project-card reveal delay-2">
+                    <div class="project-image">Ảnh dự án 3</div>
+                    <div class="project-info">
+                        <h3>Tên dự án 3</h3>
+                        <p>Mô tả ngắn về dự án (sẽ cập nhật sau).</p>
+                        <div class="project-tags">
+                            <span>JS</span>
+                            <span>API</span>
+                        </div>
+                        <a href="#" class="project-link">Xem chi tiết →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title reveal">Liên hệ</h2>
+            <p class="contact-desc reveal">
+                Nếu bạn muốn trao đổi, hợp tác hoặc chỉ đơn giản là chào hỏi,
+                hãy gửi tin nhắn cho mình nhé!
+            </p>
+
+            <form class="contact-form reveal delay-1" id="contact-form">
+                <div class="form-group">
+                    <label for="name">Họ tên</label>
+                    <input type="text" id="name" name="name" required placeholder="Nhập họ tên của bạn">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Tin nhắn</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Nội dung tin nhắn..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 Lương Đức Huy. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

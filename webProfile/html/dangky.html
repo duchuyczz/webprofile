@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrap">
+        <a href="trangchu.html" class="auth-back">← Về trang chủ</a>
+
+        <div class="auth-card">
+            <h1>Đăng ký</h1>
+            <p class="auth-subtitle">Tạo tài khoản mới (demo)</p>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="fullname">Họ tên</label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Nhập họ tên">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••" minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirm">Xác nhận mật khẩu</label>
+                    <input type="password" id="confirm" name="confirm" required placeholder="••••••••" minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary auth-btn">Đăng ký</button>
+            </form>
+
+            <p class="auth-switch">
+                Đã có tài khoản?
+                <a href="dangnhap.html">Đăng nhập</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+</body>
+</html>
