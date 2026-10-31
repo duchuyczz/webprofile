@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hộp thư | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/wallet.css">
+    <link rel="stylesheet" href="../css/inbox.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="trangchu.html" class="logo">Lương Đức Huy</a>
+            <nav class="nav" id="nav">
+                <a href="trangchu.html" class="nav-link">Trang chủ</a>
+                <a href="giohang.html" class="nav-link nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <a href="hopthu.html" class="nav-link active">Hộp thư <span class="cart-badge inbox-badge" id="inbox-badge" hidden>0</span></a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="inbox-page">
+        <div class="container inbox-wrap">
+            <div class="inbox-header">
+                <div>
+                    <h1 class="inbox-title">Hộp thư</h1>
+                    <p class="inbox-sub" id="inbox-sub">Phản hồi từ admin &amp; thông báo</p>
+                </div>
+                <div class="inbox-header-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" id="btn-mark-all-inbox">Đánh dấu đã đọc</button>
+                </div>
+            </div>
+
+            <div id="inbox-login-hint" class="inbox-empty" hidden>
+                <p>Đăng nhập để xem hộp thư và thông báo.</p>
+                <a href="dangnhap.html?next=hopthu.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+
+            <div id="inbox-list" class="inbox-list"></div>
+            <p id="inbox-empty" class="inbox-empty" hidden>Chưa có tin nhắn nào. Khi admin phản hồi form liên hệ, tin sẽ hiện tại đây.</p>
+        </div>
+    </main>
+
+    <div class="tx-modal" id="inbox-modal" hidden>
+        <div class="tx-modal-backdrop" data-close-inbox-modal></div>
+        <div class="tx-modal-panel" role="dialog" aria-modal="true">
+            <div class="tx-modal-head">
+                <h3 id="inbox-modal-title">Chi tiết</h3>
+                <button type="button" class="tx-modal-close" data-close-inbox-modal aria-label="Đóng">×</button>
+            </div>
+            <div class="tx-modal-body" id="inbox-modal-body"></div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/inbox.js"></script>
+    <script>
+        (function () {
+            let user = null;
+            try { user = JSON.parse(localStorage.getItem('currentUser') || 'null'); } catch (_) {}
+
+            const listEl = document.getElementById('inbox-list');
+            const emptyEl = document.getElementById('inbox-empty');
+            const loginHint = document.getElementById('inbox-login-hint');
+            const subEl = document.getElementById('inbox-sub');
+            const modal = document.getElementById('inbox-modal');
+            const modalBody = document.getElementById('inbox-modal-body');
+            const modalTitle = document.getElementById('inbox-modal-title');
+
+            function esc(s) {
+                return String(s || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            if (!user || user.role !== 'user') {
+                if (loginHint) loginHint.hidden = false;
+                if (listEl) listEl.innerHTML = '';
+                if (emptyEl) emptyEl.hidden = true;
+                return;
+            }
+
+            if (loginHint) loginHint.hidden = true;
+            if (subEl) {
+                subEl.textContent = 'Tài khoản: ' + (user.fullname || user.username || user.email || '');
+            }
+
+            function render() {
+                if (!window.InboxAPI || !listEl) return;
+                const items = InboxAPI.listForUser(user);
+                InboxAPI.updateNavBadge();
+
+                if (!items.length) {
+                    listEl.innerHTML = '';
+                    if (emptyEl) emptyEl.hidden = false;
+                    return;
+                }
+                if (emptyEl) emptyEl.hidden = true;
+
+                listEl.innerHTML = items.map(n => {
+                    const preview = (n.body || '').slice(0, 100);
+                    return `
+                        <article class="inbox-card ${n.unread ? 'unread' : ''}" data-id="${n.id}">
+                            <div class="inbox-card-main">
+                                <div class="inbox-card-top">
+                                    <strong>${esc(n.title || 'Thông báo')}</strong>
+                                    ${n.unread ? '<span class="inbox-dot">Mới</span>' : ''}
+                                </div>
+                                <p class="inbox-preview">${esc(preview)}${(n.body || '').length > 100 ? '…' : ''}</p>
+                                <small>${esc(n.time || '')}</small>
+                            </div>
+                            <div class="inbox-card-actions">
+                                <button type="button" class="btn btn-ghost btn-sm" data-view="${n.id}">Xem</button>
+                                <button type="button" class="btn btn-ghost btn-sm" data-del="${n.id}">Xóa</button>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+                listEl.querySelectorAll('[data-view]').forEach(btn => {
+                    btn.addEventListener('click', () => openDetail(btn.dataset.view));
+                });
+                listEl.querySelectorAll('[data-del]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (!confirm('Xóa tin này?')) return;
+                        InboxAPI.remove(btn.dataset.del);
+                        render();
+                    });
+                });
+            }
+
+            function openDetail(id) {
+                const items = InboxAPI.listForUser(user);
+                const n = items.find(x => String(x.id) === String(id));
+                if (!n) return;
+                InboxAPI.markRead(id);
+                if (modalTitle) modalTitle.textContent = n.title || 'Chi tiết';
+                if (modalBody) {
+                    modalBody.innerHTML = `
+                        <p class="inbox-detail-time"><strong>Thời gian:</strong> ${esc(n.time || '—')}</p>
+                        <div class="inbox-detail-body">${esc(n.body || '').replace(/\n/g, '<br>')}</div>
+                    `;
+                }
+                if (modal) {
+                    modal.hidden = false;
+                    document.body.style.overflow = 'hidden';
+                }
+                render();
+            }
+
+            function closeModal() {
+                if (modal) modal.hidden = true;
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-close-inbox-modal]').forEach(el => {
+                el.addEventListener('click', closeModal);
+            });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            document.getElementById('btn-mark-all-inbox')?.addEventListener('click', () => {
+                InboxAPI.markAllRead(user);
+                render();
+            });
+
+            render();
+        })();
+    </script>
+</body>
+</html>

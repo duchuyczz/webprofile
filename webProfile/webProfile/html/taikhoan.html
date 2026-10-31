@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/wallet.css">
+    <link rel="stylesheet" href="../css/inbox.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="trangchu.html" class="logo">Lương Đức Huy</a>
+            <nav class="nav" id="nav">
+                <a href="trangchu.html" class="nav-link">Trang chủ</a>
+                <a href="giohang.html" class="nav-link nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <a href="hopthu.html" class="nav-link">Hộp thư <span class="cart-badge inbox-badge" id="inbox-badge" hidden>0</span></a>
+                <a href="naptien.html" class="nav-link">Nạp tiền</a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link active" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="wallet-page">
+        <div class="container account-wrap">
+            <div class="account-header">
+                <div class="account-header-text">
+                    <p class="account-greeting">Xin chào,</p>
+                    <h1 class="wallet-title account-name" id="account-name">Tài khoản</h1>
+                    <p class="account-meta" id="account-meta">—</p>
+                </div>
+                <span class="account-chip" id="account-status">
+                    <span class="account-chip-dot" aria-hidden="true"></span>
+                    Đã đăng nhập
+                </span>
+            </div>
+
+            <div class="account-grid">
+                <section class="account-balance-card">
+                    <span class="account-balance-label">Số dư hiện tại</span>
+                    <p class="account-balance-value" id="account-balance">0 đ</p>
+                    <div class="account-actions">
+                        <a href="naptien.html" class="btn btn-primary">Nạp tiền</a>
+                        <a href="giohang.html" class="btn btn-ghost">Giỏ hàng</a>
+                        <a href="trangchu.html#products" class="btn btn-ghost">Sản phẩm</a>
+                        <button type="button" class="btn btn-ghost" id="btn-logout-acc">Đăng xuất</button>
+                    </div>
+                </section>
+
+                <section class="account-inbox">
+                    <div class="account-inbox-head">
+                        <h2>Hộp thư <span class="cart-badge inbox-badge" id="account-inbox-count" hidden>0</span></h2>
+                        <a href="hopthu.html" class="btn btn-ghost btn-sm">Xem tất cả</a>
+                    </div>
+                    <div id="account-inbox-list" class="account-inbox-mini"></div>
+                </section>
+
+                <section class="account-tx">
+                    <div class="account-tx-head">
+                        <h2>Giao dịch gần đây</h2>
+                        <p class="form-hint">Chỉ lưu tối đa <strong>5</strong> giao dịch gần nhất</p>
+                    </div>
+                    <div id="tx-list" class="tx-list"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal chi tiết giao dịch mua hàng -->
+    <div class="tx-modal" id="tx-modal" hidden>
+        <div class="tx-modal-backdrop" data-close-tx-modal></div>
+        <div class="tx-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tx-modal-title">
+            <div class="tx-modal-head">
+                <h3 id="tx-modal-title">Chi tiết đơn hàng</h3>
+                <button type="button" class="tx-modal-close" data-close-tx-modal aria-label="Đóng">×</button>
+            </div>
+            <div class="tx-modal-body" id="tx-modal-body"></div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/inbox.js"></script>
+    <script src="../js/wallet.js"></script>
+    <script src="../js/account.js"></script>
+</body>
+</html>

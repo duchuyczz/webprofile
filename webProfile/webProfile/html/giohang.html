@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="trangchu.html" class="logo">Lương Đức Huy</a>
+            <nav class="nav" id="nav">
+                <a href="trangchu.html" class="nav-link">Trang chủ</a>
+                <a href="trangchu.html#products" class="nav-link">Sản phẩm</a>
+                <a href="giohang.html" class="nav-link active nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <a href="dangky.html" class="nav-link nav-auth nav-auth-primary" id="nav-register">Đăng ký</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1 class="cart-title">Giỏ hàng</h1>
+            <p class="cart-sub" id="cart-user-label"></p>
+
+            <div id="cart-empty" class="cart-empty" hidden>
+                <p>Giỏ hàng trống.</p>
+                <a href="trangchu.html#products" class="btn btn-primary">Xem sản phẩm</a>
+            </div>
+
+            <div id="cart-login-hint" class="cart-empty" hidden>
+                <p>Bạn cần đăng nhập để dùng giỏ hàng.</p>
+                <a href="dangnhap.html" class="btn btn-primary">Đăng nhập</a>
+            </div>
+
+            <div id="cart-list" class="cart-list"></div>
+
+            <div class="cart-footer" id="cart-footer" hidden>
+                <div>
+                    <p class="cart-total">Số dư: <strong id="cart-balance">0</strong> đ</p>
+                    <p class="cart-total">Tổng SL: <strong id="cart-total-qty">0</strong> · Thành tiền: <strong id="cart-total-money">0</strong> đ</p>
+                </div>
+                <div class="cart-footer-actions">
+                    <a href="naptien.html" class="btn btn-ghost">Nạp tiền</a>
+                    <button type="button" class="btn btn-ghost" id="cart-clear">Xóa giỏ</button>
+                    <button type="button" class="btn btn-primary" id="cart-checkout">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+    <!-- Form nhận hàng khi mua -->
+    <div class="checkout-modal" id="checkout-modal" hidden>
+        <div class="checkout-modal-backdrop" data-close-checkout></div>
+        <div class="checkout-modal-panel" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+            <div class="checkout-modal-head">
+                <h2 id="checkout-title">Thông tin nhận hàng</h2>
+                <button type="button" class="checkout-modal-close" data-close-checkout aria-label="Đóng">×</button>
+            </div>
+            <form id="checkout-form" class="checkout-form">
+                <p class="checkout-total-line">Thành tiền: <strong id="checkout-total-label">0</strong> đ</p>
+
+                <fieldset class="checkout-type">
+                    <legend>Loại hàng</legend>
+                    <label class="checkout-radio">
+                        <input type="radio" name="delivery-type" value="physical" checked>
+                        <span>Hàng vật lý (giao địa chỉ)</span>
+                    </label>
+                    <label class="checkout-radio">
+                        <input type="radio" name="delivery-type" value="digital">
+                        <span>Phi vật lý (nhận qua Email / Zalo)</span>
+                    </label>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="co-name">Họ tên người nhận <span class="req">*</span></label>
+                    <input type="text" id="co-name" name="name" required placeholder="Nhập họ tên" autocomplete="name">
+                </div>
+
+                <div id="co-physical-fields">
+                    <div class="form-group">
+                        <label for="co-phone">Số điện thoại <span class="req">*</span></label>
+                        <input type="tel" id="co-phone" name="phone" placeholder="0xxxxxxxxx" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="co-address">Địa chỉ nhận hàng <span class="req">*</span></label>
+                        <textarea id="co-address" name="address" rows="3" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành"></textarea>
+                    </div>
+                </div>
+
+                <div id="co-digital-fields" hidden>
+                    <div class="form-group">
+                        <label for="co-contact-type">Nhận qua</label>
+                        <select id="co-contact-type" name="contactType">
+                            <option value="email">Email</option>
+                            <option value="zalo">Zalo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="co-contact">Email / Số Zalo <span class="req">*</span></label>
+                        <input type="text" id="co-contact" name="contact" placeholder="email@example.com hoặc số Zalo">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="co-note">Ghi chú (không bắt buộc)</label>
+                    <textarea id="co-note" name="note" rows="2" placeholder="Ghi chú thêm cho đơn hàng"></textarea>
+                </div>
+
+                <div class="checkout-form-actions">
+                    <button type="button" class="btn btn-ghost" data-close-checkout>Hủy</button>
+                    <button type="submit" class="btn btn-primary">Gửi đơn &amp; thanh toán</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/wallet.js"></script>
+    <script>
+        (function () {
+            let user = window.CartAPI && CartAPI.getCurrentUser();
+            const listEl = document.getElementById('cart-list');
+            const emptyEl = document.getElementById('cart-empty');
+            const loginHint = document.getElementById('cart-login-hint');
+            const footer = document.getElementById('cart-footer');
+            const userLabel = document.getElementById('cart-user-label');
+            const totalQty = document.getElementById('cart-total-qty');
+            const totalMoney = document.getElementById('cart-total-money');
+            const balEl = document.getElementById('cart-balance');
+
+            function esc(s) {
+                return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+            }
+
+            function syncUserBalance() {
+                if (!user) return 0;
+                try {
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const full = users.find(u => u.email === user.email || u.username === user.username);
+                    if (full) {
+                        user.balance = Number(full.balance) || 0;
+                        localStorage.setItem('currentUser', JSON.stringify({ ...user, balance: user.balance }));
+                    }
+                } catch (_) {}
+                return Number(user.balance) || 0;
+            }
+
+            function cartTotal(items) {
+                return items.reduce((s, i) => s + (Number(i.price) || 0) * (i.qty || 1), 0);
+            }
+
+            function render() {
+                if (!user) {
+                    if (loginHint) loginHint.hidden = false;
+                    if (emptyEl) emptyEl.hidden = true;
+                    if (listEl) listEl.innerHTML = '';
+                    if (footer) footer.hidden = true;
+                    if (userLabel) userLabel.textContent = 'Chưa đăng nhập';
+                    return;
+                }
+
+                const balance = syncUserBalance();
+                if (loginHint) loginHint.hidden = true;
+                if (userLabel) {
+                    userLabel.textContent = 'Tài khoản: ' + (user.fullname || user.username || user.email) +
+                        ' · Số dư: ' + balance.toLocaleString('vi-VN') + ' đ';
+                }
+
+                const items = CartAPI.loadCart(user);
+                if (!items.length) {
+                    if (emptyEl) emptyEl.hidden = false;
+                    if (listEl) listEl.innerHTML = '';
+                    if (footer) footer.hidden = true;
+                    return;
+                }
+
+                if (emptyEl) emptyEl.hidden = true;
+                if (footer) footer.hidden = false;
+                let qtySum = 0;
+                let moneySum = 0;
+                listEl.innerHTML = items.map(item => {
+                    const qty = item.qty || 1;
+                    const price = Number(item.price) || 0;
+                    qtySum += qty;
+                    moneySum += price * qty;
+                    const img = item.image
+                        ? `<img src="${esc(item.image)}" alt="">`
+                        : `<span class="cart-item-ph">SP</span>`;
+                    return `
+                        <article class="cart-item" data-id="${item.id}">
+                            <div class="cart-item-img">${img}</div>
+                            <div class="cart-item-body">
+                                <h3>${esc(item.name)}</h3>
+                                <p>${esc(item.desc)}</p>
+                                <p class="product-price">${price.toLocaleString('vi-VN')} đ × ${qty}</p>
+                                <div class="cart-item-qty">
+                                    <button type="button" data-dec="${item.id}">−</button>
+                                    <span>${qty}</span>
+                                    <button type="button" data-inc="${item.id}">+</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-danger btn-sm" data-remove="${item.id}">Xóa</button>
+                        </article>
+                    `;
+                }).join('');
+                if (totalQty) totalQty.textContent = qtySum;
+                if (totalMoney) totalMoney.textContent = moneySum.toLocaleString('vi-VN');
+                if (balEl) balEl.textContent = balance.toLocaleString('vi-VN');
+
+                listEl.querySelectorAll('[data-inc]').forEach(btn => {
+                    btn.addEventListener('click', () => changeQty(Number(btn.dataset.inc), 1));
+                });
+                listEl.querySelectorAll('[data-dec]').forEach(btn => {
+                    btn.addEventListener('click', () => changeQty(Number(btn.dataset.dec), -1));
+                });
+                listEl.querySelectorAll('[data-remove]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const next = CartAPI.loadCart(user).filter(i => Number(i.id) !== Number(btn.dataset.remove));
+                        CartAPI.saveCart(user, next);
+                        render();
+                    });
+                });
+            }
+
+            function changeQty(id, delta) {
+                const items = CartAPI.loadCart(user);
+                const it = items.find(i => Number(i.id) === id);
+                if (!it) return;
+                it.qty = Math.max(1, (it.qty || 1) + delta);
+                CartAPI.saveCart(user, items);
+                render();
+            }
+
+            document.getElementById('cart-clear')?.addEventListener('click', () => {
+                if (!user || !confirm('Xóa toàn bộ giỏ hàng?')) return;
+                CartAPI.saveCart(user, []);
+                render();
+            });
+
+            const checkoutModal = document.getElementById('checkout-modal');
+            const checkoutForm = document.getElementById('checkout-form');
+            const physicalFields = document.getElementById('co-physical-fields');
+            const digitalFields = document.getElementById('co-digital-fields');
+            const totalLabel = document.getElementById('checkout-total-label');
+
+            function openCheckoutModal(total) {
+                if (totalLabel) totalLabel.textContent = total.toLocaleString('vi-VN');
+                const nameInput = document.getElementById('co-name');
+                if (nameInput && !nameInput.value) {
+                    nameInput.value = user.fullname || user.username || '';
+                }
+                const contactInput = document.getElementById('co-contact');
+                if (contactInput && !contactInput.value && user.email) {
+                    contactInput.value = user.email;
+                }
+                toggleDeliveryType();
+                if (checkoutModal) {
+                    checkoutModal.hidden = false;
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeCheckoutModal() {
+                if (checkoutModal) checkoutModal.hidden = true;
+                document.body.style.overflow = '';
+            }
+
+            function toggleDeliveryType() {
+                const type = (document.querySelector('input[name="delivery-type"]:checked') || {}).value || 'physical';
+                if (physicalFields) physicalFields.hidden = type !== 'physical';
+                if (digitalFields) digitalFields.hidden = type !== 'digital';
+                const phone = document.getElementById('co-phone');
+                const address = document.getElementById('co-address');
+                const contact = document.getElementById('co-contact');
+                if (phone) phone.required = type === 'physical';
+                if (address) address.required = type === 'physical';
+                if (contact) contact.required = type === 'digital';
+            }
+
+            document.querySelectorAll('input[name="delivery-type"]').forEach(r => {
+                r.addEventListener('change', toggleDeliveryType);
+            });
+            document.querySelectorAll('[data-close-checkout]').forEach(el => {
+                el.addEventListener('click', closeCheckoutModal);
+            });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') closeCheckoutModal();
+            });
+
+            function saveAdminOrder(order) {
+                let list = [];
+                try { list = JSON.parse(localStorage.getItem('admin_orders') || '[]'); } catch (_) {}
+                if (!Array.isArray(list)) list = [];
+                list.unshift(order);
+                localStorage.setItem('admin_orders', JSON.stringify(list.slice(0, 100)));
+            }
+
+            function completePurchase(delivery) {
+                const items = CartAPI.loadCart(user);
+                const total = cartTotal(items);
+                if (!items.length) return;
+
+                const snapshot = items.map(it => ({
+                    id: it.id,
+                    name: it.name || 'Sản phẩm',
+                    qty: Number(it.qty) || 1,
+                    price: Number(it.price) || 0,
+                    image: it.image || ''
+                }));
+                const noteNames = snapshot
+                    .map(it => it.name + (it.qty > 1 ? ' ×' + it.qty : ''))
+                    .join(', ');
+
+                const orderId = Date.now();
+                const order = {
+                    id: orderId,
+                    time: new Date().toLocaleString('vi-VN'),
+                    status: 'pending',
+                    total: total,
+                    items: snapshot,
+                    delivery: delivery,
+                    user: {
+                        username: user.username || '',
+                        fullname: user.fullname || '',
+                        email: user.email || ''
+                    }
+                };
+
+                if (window.WalletAPI) {
+                    WalletAPI.pushTransaction(user, {
+                        type: 'purchase',
+                        amount: -total,
+                        note: 'Mua: ' + (noteNames.length > 80 ? noteNames.slice(0, 77) + '…' : noteNames),
+                        items: snapshot,
+                        delivery: delivery,
+                        orderId: orderId
+                    });
+                    const updated = WalletAPI.getUserRecord(user);
+                    if (updated) {
+                        user.balance = Number(updated.balance) || 0;
+                        localStorage.setItem('currentUser', JSON.stringify(user));
+                    }
+                } else {
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const idx = users.findIndex(u => u.email === user.email || u.username === user.username);
+                    if (idx === -1) { alert('Không tìm thấy tài khoản.'); return; }
+                    users[idx].balance = (Number(users[idx].balance) || 0) - total;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    user.balance = users[idx].balance;
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+
+                saveAdminOrder(order);
+                CartAPI.saveCart(user, []);
+                closeCheckoutModal();
+                alert(
+                    'Đặt hàng thành công!\n' +
+                    'Đơn #' + orderId + ' đã gửi tới admin xử lý.\n' +
+                    'Số dư còn: ' + (Number(user.balance) || 0).toLocaleString('vi-VN') + ' đ'
+                );
+                render();
+            }
+
+            document.getElementById('cart-checkout')?.addEventListener('click', () => {
+                if (!user) return;
+                const items = CartAPI.loadCart(user);
+                const total = cartTotal(items);
+                const balance = syncUserBalance();
+                if (!items.length) return;
+                if (total <= 0) {
+                    alert('Sản phẩm chưa có giá. Admin cần đặt giá trong Quản trị.');
+                    return;
+                }
+                if (balance < total) {
+                    alert(
+                        'Số dư không đủ.\nCần: ' + total.toLocaleString('vi-VN') + ' đ\n' +
+                        'Hiện có: ' + balance.toLocaleString('vi-VN') + ' đ\n\nVào Tài khoản → Nạp tiền, chờ admin cộng số dư.'
+                    );
+                    return;
+                }
+                openCheckoutModal(total);
+            });
+
+            checkoutForm?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!user) return;
+                const type = (document.querySelector('input[name="delivery-type"]:checked') || {}).value || 'physical';
+                const name = (document.getElementById('co-name')?.value || '').trim();
+                const note = (document.getElementById('co-note')?.value || '').trim();
+                if (!name) {
+                    alert('Vui lòng nhập họ tên người nhận.');
+                    return;
+                }
+
+                let delivery = { type, name, note };
+
+                if (type === 'physical') {
+                    const phone = (document.getElementById('co-phone')?.value || '').trim();
+                    const address = (document.getElementById('co-address')?.value || '').trim();
+                    if (!phone) {
+                        alert('Vui lòng nhập số điện thoại.');
+                        return;
+                    }
+                    if (!address) {
+                        alert('Vui lòng nhập địa chỉ nhận hàng.');
+                        return;
+                    }
+                    delivery.phone = phone;
+                    delivery.address = address;
+                } else {
+                    const contactType = document.getElementById('co-contact-type')?.value || 'email';
+                    const contact = (document.getElementById('co-contact')?.value || '').trim();
+                    if (!contact) {
+                        alert('Vui lòng nhập Email hoặc Zalo nhận hàng.');
+                        return;
+                    }
+                    delivery.contactType = contactType;
+                    delivery.contact = contact;
+                }
+
+                if (!confirm('Xác nhận gửi đơn và trừ tiền trong số dư?')) return;
+                completePurchase(delivery);
+            });
+
+            render();
+        })();
+    </script>
+</body>
+</html>

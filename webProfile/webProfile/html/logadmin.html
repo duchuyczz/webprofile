@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập Admin | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <div class="auth-wrap">
+        <a href="trangchu.html" class="auth-back">← Về trang chủ</a>
+
+        <div class="auth-card">
+            <h1>Đăng nhập Admin</h1>
+            <p class="auth-subtitle">Khu vực quản trị — chỉ dành cho quản trị viên</p>
+
+            <form id="admin-login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="admin-account">Tài khoản</label>
+                    <input type="text" id="admin-account" name="account" required placeholder="Tài khoản admin" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Mật khẩu</label>
+                    <input type="password" id="admin-password" name="password" required placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary auth-btn">Đăng nhập Admin</button>
+            </form>
+
+            <p id="admin-login-error" style="display:none;color:#ef4444;text-align:center;margin-top:14px;font-size:0.9rem;"></p>
+
+            <p class="auth-switch" style="margin-top:20px;">
+                Bạn là người dùng?
+                <a href="dangnhap.html">Đăng nhập người dùng</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Tài khoản admin cố định (độc lập với đăng nhập người dùng)
+        const ADMIN_ACCOUNT = 'adm';
+        const ADMIN_PASSWORD = '1';
+
+        // Đã đăng nhập admin rồi → vào thẳng dashboard
+        try {
+            const session = JSON.parse(localStorage.getItem('adminSession') || 'null');
+            if (session && session.role === 'admin') {
+                window.location.replace('quantri.html');
+            }
+        } catch (_) {}
+
+        document.getElementById('admin-login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const account = document.getElementById('admin-account').value.trim();
+            const password = document.getElementById('admin-password').value;
+            const err = document.getElementById('admin-login-error');
+
+            if (account === ADMIN_ACCOUNT && password === ADMIN_PASSWORD) {
+                localStorage.setItem('adminSession', JSON.stringify({
+                    username: 'adm',
+                    fullname: 'Lương Đức Huy',
+                    role: 'admin',
+                    loginAt: new Date().toISOString()
+                }));
+                window.location.href = 'quantri.html';
+                return;
+            }
+
+            err.style.display = 'block';
+            err.textContent = 'Sai tài khoản hoặc mật khẩu admin.';
+        });
+    </script>
+</body>
+</html>

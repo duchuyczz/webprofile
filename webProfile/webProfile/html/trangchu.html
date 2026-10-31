@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lương Đức Huy | Portfolio</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== HEADER / NAV ========== -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#home" class="logo" id="dyn-logo">Lương Đức Huy</a>
+
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Trang chủ</a>
+                <a href="#products" class="nav-link">Sản phẩm</a>
+                <a href="giohang.html" class="nav-link nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <a href="hopthu.html" class="nav-link nav-inbox" id="nav-inbox" hidden>Hộp thư <span class="cart-badge inbox-badge" id="inbox-badge" hidden>0</span></a>
+                <a href="#contact" class="nav-link">Liên hệ</a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <a href="dangky.html" class="nav-link nav-auth nav-auth-primary" id="nav-register">Đăng ký</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text animate-on-load">
+                <p class="hero-greeting">Xin chào, mình là</p>
+                <h1 class="hero-name" id="dyn-hero-name">Lương Đức Huy</h1>
+                <h2 class="hero-title" id="dyn-hero-title">Sinh viên An toàn thông tin</h2>
+                <p class="hero-desc" id="dyn-hero-desc">
+                    Sinh viên Khoa Công nghệ thông tin — Đại học Quy Nhơn, định hướng chuyên ngành
+                    An toàn an ninh mạng. Quan tâm bảo mật hệ thống, mạng máy tính và tư duy phòng thủ.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">Xem sản phẩm</a>
+                    <a href="#contact" class="btn btn-outline">Liên hệ</a>
+                </div>
+            </div>
+            <div class="hero-image animate-on-load delay-1">
+                <img src="../images/anhdaidien.JPG" alt="Ảnh đại diện Lương Đức Huy" class="avatar-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EDUCATION ========== -->
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title reveal">Học vấn</h2>
+            <div class="education-card reveal">
+                <div class="education-icon">🎓</div>
+                <div class="education-body">
+                    <h3 id="dyn-edu-school">Đại học Quy Nhơn</h3>
+                    <p class="education-major" id="dyn-edu-major">Khoa Công nghệ thông tin — hướng An toàn an ninh mạng</p>
+                    <p class="education-meta" id="dyn-edu-meta">Sinh viên · Quy Nhơn</p>
+                    <p class="education-desc">
+                        Theo học tại Khoa CNTT, định hướng chuyên ngành An toàn an ninh mạng:
+                        làm quen bảo mật mạng, hệ thống, nhận diện mối đe dọa và thực hành an toàn thông tin cơ bản.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TIMELINE ========== -->
+    <section id="timeline" class="section timeline-section">
+        <div class="container">
+            <h2 class="section-title reveal">Hành trình</h2>
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h3>Nhập học Đại học Quy Nhơn</h3>
+                        <p>Bắt đầu tại Khoa Công nghệ thông tin: lập trình cơ bản, tư duy máy tính và nền tảng CNTT.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2025</span>
+                        <h3>Web &amp; nền tảng kỹ thuật</h3>
+                        <p>Học HTML, CSS, JavaScript; hiểu cách ứng dụng web hoạt động — bước đệm quan trọng khi tìm hiểu bảo mật ứng dụng.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2026</span>
+                        <h3>Định hướng An toàn an ninh mạng</h3>
+                        <p>Tập trung chuyên ngành bảo mật: mạng máy tính, hệ thống, nhận diện rủi ro và xây portfolio gắn với hướng học này.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">Tương lai</span>
+                        <h3>Mục tiêu tiếp theo</h3>
+                        <p>Đào sâu lab bảo mật, chứng chỉ cơ bản (nếu phù hợp), dự án thực hành an toàn thông tin và hướng tới thực tập chuyên ngành.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRODUCTS (Sản phẩm) ========== -->
+    <section id="products" class="section projects">
+        <div class="container">
+            <h2 class="section-title reveal">Sản phẩm</h2>
+            <div class="product-filters reveal" id="product-filters">
+                <button type="button" class="filter-chip active" data-tag="all">Tất cả</button>
+            </div>
+            <div class="projects-grid" id="dyn-products-grid">
+                <!-- Sản phẩm render từ localStorage (admin) hoặc mặc định trong main.js -->
+            </div>
+            <p class="products-empty" id="products-empty" hidden>Không có sản phẩm nào với bộ lọc này.</p>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-head reveal">
+                <p class="contact-eyebrow">Liên hệ</p>
+                <h2 class="section-title">Gửi lời nhắn cho mình</h2>
+                <p class="contact-desc">
+                    Hợp tác, hỏi về sản phẩm hoặc chỉ muốn chào hỏi — điền form, mình sẽ phản hồi sớm.
+                </p>
+            </div>
+
+            <div class="contact-panel reveal delay-1">
+                <div class="contact-aside">
+                    <h3 class="contact-aside-title">Thông tin</h3>
+                    <p class="contact-aside-text">Sinh viên CNTT tại Quy Nhơn. Ưu tiên phản hồi qua email hoặc Zalo.</p>
+                    <ul class="contact-channels">
+                        <li>
+                            <span class="contact-ch-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </span>
+                            <div>
+                                <span class="contact-ch-label">Email</span>
+                                <a href="mailto:email@example.com" class="contact-ch-value">email@example.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="contact-ch-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </span>
+                            <div>
+                                <span class="contact-ch-label">GitHub</span>
+                                <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer" class="contact-ch-value">duchuyczz</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="contact-ch-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </span>
+                            <div>
+                                <span class="contact-ch-label">Địa điểm</span>
+                                <span class="contact-ch-value">Quy Nhơn</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="contact-aside-note">Tin nhắn được gửi tới khu vực Quản trị để xử lý.</p>
+                </div>
+
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="contact-form-row">
+                        <div class="form-group">
+                            <label for="cf-name">Họ tên <span class="req">*</span></label>
+                            <input type="text" id="cf-name" name="cf_name" required placeholder="Nguyễn Văn A" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-subject">Chủ đề</label>
+                            <select id="cf-subject" name="cf_subject">
+                                <option value="Chào hỏi">Chào hỏi</option>
+                                <option value="Hợp tác">Hợp tác</option>
+                                <option value="Sản phẩm">Hỏi về sản phẩm</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cf-contact">Email / SĐT / Zalo <span class="req">*</span></label>
+                        <input type="text" id="cf-contact" name="cf_contact" required placeholder="email@gmail.com hoặc 0912345678" autocomplete="email">
+                        <p class="field-hint">Email, SĐT hoặc Zalo (tối thiểu 6 ký tự)</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="cf-message">Nội dung <span class="req">*</span></label>
+                        <textarea id="cf-message" name="cf_message" rows="4" required placeholder="Viết nội dung bạn muốn gửi..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary contact-submit" id="cf-submit">
+                        Gửi tin nhắn
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT (cuối trang) ========== -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title reveal">Giới thiệu</h2>
+            <p class="about-lead reveal">Vài nét về mình và định hướng học tập</p>
+
+            <div class="about-shell reveal">
+                <div class="about-main">
+                    <div class="about-avatar-block">
+                        <div class="about-avatar-ring">
+                            <img src="../images/anhdaidien.JPG" alt="Lương Đức Huy" class="about-avatar-img" onerror="this.style.display='none'">
+                        </div>
+                        <div class="about-avatar-meta">
+                            <h3 id="dyn-about-name">Lương Đức Huy</h3>
+                            <p class="about-role" id="dyn-info-job">Sinh viên — An toàn thông tin</p>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <p id="dyn-about-p1">
+                            Mình <span id="dyn-about-age">19</span> tuổi, sinh viên Khoa Công nghệ thông tin
+                            tại Đại học Quy Nhơn, đang theo hướng <strong>An toàn an ninh mạng</strong>.
+                        </p>
+                        <p id="dyn-about-bio">
+                            Mình muốn xây nền tảng vững về mạng máy tính, hệ điều hành và bảo mật,
+                            đồng thời vẫn luyện kỹ năng lập trình web để hiểu cách ứng dụng hoạt động
+                            và những rủi ro thường gặp. Portfolio này ghi lại quá trình học và các sản phẩm thực hành.
+                        </p>
+                        <div class="about-focus">
+                            <span class="about-chip">An toàn thông tin</span>
+                            <span class="about-chip">Mạng máy tính</span>
+                            <span class="about-chip">Bảo mật hệ thống</span>
+                            <span class="about-chip">Web &amp; rủi ro ứng dụng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="about-side">
+                    <h4 class="about-side-title">Thông tin</h4>
+                    <ul class="about-info-list">
+                        <li>
+                            <span class="about-k">Họ tên</span>
+                            <span class="about-v" id="dyn-info-name">Lương Đức Huy</span>
+                        </li>
+                        <li>
+                            <span class="about-k">Tuổi</span>
+                            <span class="about-v" id="dyn-info-age">19</span>
+                        </li>
+                        <li>
+                            <span class="about-k">Địa chỉ</span>
+                            <span class="about-v" id="dyn-info-address">Quy Nhơn</span>
+                        </li>
+                        <li>
+                            <span class="about-k">GitHub</span>
+                            <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer" class="info-link about-v" id="dyn-info-github">duchuyczz</a>
+                        </li>
+                        <li>
+                            <span class="about-k">Email</span>
+                            <a href="mailto:email@example.com" class="info-link about-v">email@example.com</a>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary about-cta">Liên hệ với mình</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 Lương Đức Huy. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Thanh tiến độ cuộn -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Nút lên đầu trang -->
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="Lên đầu trang">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <!-- Toast container -->
+    <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/inbox.js"></script>
+</body>
+</html>

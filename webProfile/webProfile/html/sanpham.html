@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/product-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-inner">
+            <a href="trangchu.html" class="logo">Lương Đức Huy</a>
+            <nav class="nav" id="nav">
+                <a href="trangchu.html" class="nav-link">Trang chủ</a>
+                <a href="trangchu.html#products" class="nav-link active">Sản phẩm</a>
+                <a href="giohang.html" class="nav-link nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <a href="dangky.html" class="nav-link nav-auth nav-auth-primary" id="nav-register">Đăng ký</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ sáng/tối">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Mở menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-detail-page">
+        <div class="container">
+            <a href="trangchu.html#products" class="detail-back">← Về danh sách sản phẩm</a>
+
+            <div id="product-detail" class="product-detail">
+                <p class="detail-loading">Đang tải sản phẩm…</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 Lương Đức Huy. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/duchuyczz" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/product-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp tiền | Lương Đức Huy</title>
+    <link rel="stylesheet" href="../css/type.css">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/wallet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="trangchu.html" class="logo">Lương Đức Huy</a>
+            <nav class="nav" id="nav">
+                <a href="trangchu.html" class="nav-link">Trang chủ</a>
+                <a href="giohang.html" class="nav-link nav-cart">Giỏ hàng <span class="cart-badge" id="cart-badge" hidden>0</span></a>
+                <a href="naptien.html" class="nav-link active">Nạp tiền</a>
+                <div class="nav-divider"></div>
+                <a href="taikhoan.html" class="nav-link nav-user-link" id="nav-account" hidden>Tài khoản</a>
+                <span class="nav-user" id="nav-user" hidden></span>
+                <a href="dangnhap.html" class="nav-link nav-auth" id="nav-login">Đăng nhập</a>
+                <button type="button" class="nav-link nav-auth" id="nav-logout" hidden>Đăng xuất</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Chuyển chế độ">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="wallet-page">
+        <div class="container">
+            <h1 class="wallet-title">Nạp tiền</h1>
+            <p class="wallet-balance" id="wallet-balance-line">Số dư: —</p>
+
+            <div class="wallet-notice" id="wallet-notice">
+                <strong>Lưu ý khi nạp tiền</strong>
+                <ul>
+                    <li>Nhập <strong>đúng nội dung</strong> chuyển khoản để được hỗ trợ tốt nhất.</li>
+                    <li>Tiền sẽ được cộng trong <strong>24 giờ</strong>.</li>
+                    <li>Vui lòng <strong>liên hệ admin</strong> để được xử lý nhanh hoặc khi gặp lỗi.</li>
+                </ul>
+            </div>
+
+            <div class="wallet-grid">
+                <div class="wallet-card">
+                    <h2>Quét QR / ảnh chuyển khoản</h2>
+                    <div class="wallet-qr">
+                        <img src="../images/naptien/naptien.jpg" alt="QR nạp tiền" id="deposit-qr">
+                    </div>
+                </div>
+                <div class="wallet-card">
+                    <h2>Thông tin chuyển khoản</h2>
+                    <ul class="wallet-info">
+                        <li><span>Ngân hàng</span><strong>BIDV</strong></li>
+                        <li><span>Chủ tài khoản</span><strong>Lương Đức Huy</strong></li>
+                        <li><span>Nội dung</span><strong id="deposit-content">naptien_tentaikhoan</strong></li>
+                    </ul>
+                    <p class="wallet-hint">
+                        Thay <code>tentaikhoan</code> bằng email / tên tài khoản của bạn.
+                        Ví dụ: <code id="deposit-example">naptien_ban@email.com</code>
+                    </p>
+                    <button type="button" class="btn btn-ghost" id="btn-copy-content">Sao chép nội dung CK</button>
+                    <a href="trangchu.html#contact" class="btn btn-primary" style="margin-top:10px;display:inline-flex;">Liên hệ admin</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+    <script src="../js/main.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        (function () {
+            let user = null;
+            try { user = JSON.parse(localStorage.getItem('currentUser') || 'null'); } catch (_) {}
+            if (!user || user.role !== 'user') {
+                alert('Vui lòng đăng nhập để nạp tiền.');
+                window.location.href = 'dangnhap.html';
+                return;
+            }
+
+            // Đồng bộ số dư từ danh sách users
+            try {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const full = users.find(u => u.email === user.email || u.username === user.username);
+                if (full) {
+                    user.balance = Number(full.balance) || 0;
+                    localStorage.setItem('currentUser', JSON.stringify({ ...user, balance: user.balance }));
+                }
+            } catch (_) {}
+
+            const bal = Number(user.balance) || 0;
+            const line = document.getElementById('wallet-balance-line');
+            if (line) line.textContent = 'Số dư hiện tại: ' + bal.toLocaleString('vi-VN') + ' đ';
+
+            const accountKey = (user.username || user.email || 'user').replace(/\s+/g, '');
+            const content = 'naptien_' + accountKey;
+            const contentEl = document.getElementById('deposit-content');
+            const exampleEl = document.getElementById('deposit-example');
+            if (contentEl) contentEl.textContent = content;
+            if (exampleEl) exampleEl.textContent = content;
+
+            document.getElementById('btn-copy-content')?.addEventListener('click', () => {
+                const t = content;
+                const done = () => alert('Đã sao chép: ' + t);
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(t).then(done).catch(() => {
+                        prompt('Sao chép nội dung:', t);
+                    });
+                } else {
+                    prompt('Sao chép nội dung:', t);
+                }
+            });
+
+            // Thông báo một lần khi vào trang
+            alert(
+                'Nhập đúng nội dung để được hỗ trợ tốt nhất.\n' +
+                'Tiền sẽ được cộng trong 24h.\n' +
+                'Vui lòng liên hệ admin để được xử lý nhanh và khi gặp lỗi.'
+            );
+        })();
+    </script>
+</body>
+</html>
